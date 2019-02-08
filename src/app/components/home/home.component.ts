@@ -121,5 +121,12 @@ export class HomeComponent implements OnInit {
       error => {
         console.log('Error Getting Lat Lng: ');
       });
+
+    // this.mapLayer.mapCenterChange
+    // .subscribe(
+    //   event => {
+    //     console.log("MapCenter----" + "lat: " + event.latLng.lat() + ", lng: " + event.latLng.lng());
+    //   }
+    // )
   }
 }

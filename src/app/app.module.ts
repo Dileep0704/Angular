@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { fakeBackendProvider } from './helpers/fake-backend';
+import { GoogleSearchDirective } from './directives/google-search.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { fakeBackendProvider } from './helpers/fake-backend';
     HomeComponent,
     LoginComponent,
     AlertComponent,
-    RegisterComponent
+    RegisterComponent,
+    GoogleSearchDirective
   ],
   imports: [
     BrowserModule,
