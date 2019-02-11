@@ -6,7 +6,7 @@ import { } from 'google-maps';
 
 import { DataService } from '../../services/data.service';
 import { MapLayerService } from '../../services/map.layers.service';
-import {Globals} from '../../globals';
+import { GoogleMapWrapperService } from '../../services/google-map-wrapper.service';
 
 @Component({
   selector: 'app-home',
@@ -17,53 +17,20 @@ export class HomeComponent implements OnInit {
 
   h1Style: boolean = false;
   users: Object;
-  //map: google.maps.Map;
+  mapRef: google.maps.Map;
   private mapClickSubscription: Subscription;
 
   constructor(
     private data: DataService,
     private mapLayer: MapLayerService,
-    private globals: Globals
-  ) { }
-
-  ngOnInit() {
-    //this.initializeMap()
-    this.loadDummyUsers()
-    this.mapClick()
+    private googleMapService: GoogleMapWrapperService
+  ) { 
+    this.mapRef = googleMapService.getMapRef()
   }
 
-  initializeMap() {
-    var styles = [];
-    styles.push({
-      featureType: 'poi',
-      elementType: 'labels.icon',
-      stylers: [{ visibility: 'off' }],
-    });
-
-    var mapProp = {
-      center: new google.maps.LatLng(24.886, -70.268),
-      zoom: 5,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      panControl: false,
-      mapTypeControl: false,
-      mapTypeControlOptions: {
-        position: google.maps.ControlPosition.BOTTOM_RIGHT
-      },
-      zoomControlOptions: {
-        style: google.maps.ZoomControlStyle.SMALL,
-        position: google.maps.ControlPosition.RIGHT_BOTTOM
-      },
-      streetViewControl: true,
-      streetViewControlOptions: {
-        position: google.maps.ControlPosition.RIGHT_BOTTOM,
-        enableCloseButton: true
-      },
-      styles: styles,
-      clickableIcons: false,
-      clickableLabels: false
-    };
-
-    this.globals.map = new google.maps.Map(document.getElementById('map-canvas'), mapProp);
+  ngOnInit() {
+    this.loadDummyUsers()
+    this.mapClick()
   }
 
   loadDummyUsers() {
@@ -76,7 +43,7 @@ export class HomeComponent implements OnInit {
   firstClick() {
     //this.h1Style = !this.h1Style;
     //this.data.firstClick();
-    console.log(this.globals.map.getZoom());
+    console.log(this.mapRef.getZoom());
 
     var triangleCoords = [
       {lat: 25.774, lng: -80.190},
@@ -94,7 +61,7 @@ export class HomeComponent implements OnInit {
       fillColor: '#FF0000',
       fillOpacity: 0.35
     });
-    bermudaTriangle.setMap(this.globals.map);
+    bermudaTriangle.setMap(this.mapRef);
   }
 
   mapClick() {

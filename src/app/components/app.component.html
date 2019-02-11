@@ -1,5 +1,5 @@
 <app-nav *ngIf="currentUser"></app-nav>
 
-<div [hidden]="!currentUser" id="map-canvas" style="position: relative; overflow: hidden;"> </div>
+<div google-map [hidden]="!currentUser" id="map-canvas" style="position: relative; overflow: hidden;"> </div>
 <app-alert></app-alert>
 <router-outlet></router-outlet>

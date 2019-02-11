@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { } from 'google-maps';
 
-import {Globals} from '../../globals';
+import { GoogleMapWrapperService } from '../../services/google-map-wrapper.service';
 
 @Component({
   selector: 'app-about',
@@ -11,7 +12,11 @@ import {Globals} from '../../globals';
 export class AboutComponent implements OnInit {
 
   title =  "Dileep";
-  constructor(private globals: Globals) { }
+  mapRef: google.maps.Map;
+
+  constructor(private googleMapService: GoogleMapWrapperService) { 
+    this.mapRef = googleMapService.getMapRef()
+  }
 
   ngOnInit() {
     this.subscribeToCustomObservable()
@@ -45,7 +50,7 @@ export class AboutComponent implements OnInit {
   }
 
   firstClick() {
-    console.log(this.globals.map.getZoom());
+    console.log(this.mapRef.getZoom());
 
     var triangleCoords = [
       {lat: 25.774, lng: -80.190},
@@ -66,7 +71,7 @@ export class AboutComponent implements OnInit {
       strokeOpacity: 1.0,
       strokeWeight: 2
     });
-    flightPath.setMap(this.globals.map);
+    flightPath.setMap(this.mapRef);
   }
 
 }

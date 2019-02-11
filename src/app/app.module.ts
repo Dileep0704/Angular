@@ -20,6 +20,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { fakeBackendProvider } from './helpers/fake-backend';
 import { GoogleSearchDirective } from './directives/google-search.directive';
+import { GoogleMapDirective } from './directives/google-map.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GoogleSearchDirective } from './directives/google-search.directive';
     LoginComponent,
     AlertComponent,
     RegisterComponent,
-    GoogleSearchDirective
+    GoogleSearchDirective,
+    GoogleMapDirective
   ],
   imports: [
     BrowserModule,
